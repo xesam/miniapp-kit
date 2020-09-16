@@ -1,0 +1,24 @@
+{
+  "name": "miniapp-compat",
+  "version": "0.0.1",
+  "description": "",
+  "miniprogram": "dist",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:xesam/miniapp-compat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xesam/miniapp-compat"
+  },
+  "homepage": "https://github.com/xesam/miniapp-compat",
+  "devDependencies": {
+  },
+  "keywords": [
+    "miniapp"
+  ],
+  "author": "xesam",
+  "license": "ISC"
+}
