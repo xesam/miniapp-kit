@@ -1,19 +1,19 @@
 {
-  "name": "miniapp-compat",
+  "name": "miniapp-kit",
   "version": "0.0.1",
   "description": "",
-  "miniprogram": "dist",
+  "miniprogram": "libs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+git@github.com:xesam/miniapp-compat.git"
+    "url": "git+git@github.com:xesam/miniapp-kit.git"
   },
   "bugs": {
-    "url": "https://github.com/xesam/miniapp-compat"
+    "url": "https://github.com/xesam/miniapp-kit"
   },
-  "homepage": "https://github.com/xesam/miniapp-compat",
+  "homepage": "https://github.com/xesam/miniapp-kit",
   "devDependencies": {
   },
   "keywords": [
