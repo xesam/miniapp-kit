@@ -14,8 +14,10 @@
     "url": "https://github.com/xesam/miniapp-kit"
   },
   "homepage": "https://github.com/xesam/miniapp-kit",
-  "devDependencies": {
+  "dependencies": {
+    "@xesam/miniapp": "0.0.1"
   },
+  "devDependencies": {},
   "keywords": [
     "miniapp"
   ],
