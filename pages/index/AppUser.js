@@ -1,4 +1,4 @@
-import User from "../../libs/user/index";
+import {User} from '../../index';
 
 class AppUser extends User {
     constructor() {

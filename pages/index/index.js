@@ -1,6 +1,5 @@
-import loc from '../../libs/location/index';
+import {location, storage} from '../../index';
 import appUser from './AppUser';
-import storage from "../../libs/storage/index";
 
 Page({
     data: {},
@@ -9,7 +8,7 @@ Page({
     },
 
     onTapGetLocation(e) {
-        loc.authorize().then(res => {
+        location.authorize().then(res => {
             return loc.get().then(location => {
                 console.log(location);
             }).catch(err => {
