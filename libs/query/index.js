@@ -1,7 +1,6 @@
 function getScene(query) {
     if (query.scene) {
         const sceneStr = decodeURIComponent(query.scene);
-        return url.fromQueryString(sceneStr);
     }
     return {};
 }
@@ -9,8 +8,6 @@ function getScene(query) {
 function getQrCode(query) {
     if (query.q) {
         const raw = decodeURIComponent(query.q);
-        const rawUrlQs = url.getQuery(query.q, true);
-        return url.fromQueryString(rawUrlQs);
     }
     return {};
 }

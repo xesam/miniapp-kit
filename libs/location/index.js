@@ -1,29 +1,22 @@
-const runtime = require("@xesam/miniapp");
+import wxx from '../wxx';
 
-function get(options) {
-    return new Promise((resolve, reject) => {
-        runtime.host.getLocation({
-            type: options.type,
-            success(res) {
-                resolve({
-                    type: options.type,
-                    ...res
-                });
-            },
-            fail(res) {
-                reject(res);
-            }
-        });
+function _getLocation(opts) {
+    return wxx('getLocation')(opts).then(res => {
+        return {
+            type: opts.type,
+            ...res
+        };
     });
 }
-
-const DEFAULT_TYPE = 'wgs84';
-const THROTTLE_INTERVAL = 180000;
 
 let LAST_CACHE = {
     time: 0,
     location: {}
 };
+
+function checkThrottle(interval) {
+    return Date.now() - LAST_CACHE.time >= interval;
+}
 
 function updateCache(location) {
     LAST_CACHE.time = Date.now();
@@ -31,34 +24,42 @@ function updateCache(location) {
     return LAST_CACHE.location;
 }
 
-function checkLocation(location) {
-    return location && location.type;
+function authorize(scope = 'userLocation') {
+    return wxx('getSetting')().then(res => {
+        if (res.authSetting[`scope.${scope}`]) {
+            return Promise.resolve({status: 'ok'});
+        } else {
+            return wxx('authorize')({
+                scope: `scope.${scope}`
+            }).then(() => {
+                return Promise.resolve({status: 'ok'});
+            }).catch(e => {
+                return Promise.reject({status: 'deny'});
+            });
+        }
+    })
 }
 
-function getLocationSync() {
-    return LAST_CACHE.location;
-}
-
-function getLocation() {
-    return get({type: DEFAULT_TYPE})
+function get(opts) {
+    return _getLocation({type: 'wgs84', ...opts})
         .then(updateCache);
 }
 
-function checkThrottle() {
-    return Date.now() - LAST_CACHE.time >= THROTTLE_INTERVAL;
+function getSync() {
+    return LAST_CACHE.location;
 }
 
-function getThrottleLocation() {
-    if (checkThrottle()) {
-        return getLocation();
+function getThrottle(opts = {}, interval = 60000) {
+    if (checkThrottle(interval)) {
+        return get(opts);
     } else {
-        return Promise.resolve(LAST_CACHE.location);
+        return Promise.resolve(getSync());
     }
 }
 
 export default {
-    checkLocation,
-    getLocation,
-    getLocationSync,
-    getThrottleLocation
+    authorize,
+    get,
+    getSync,
+    getThrottle
 }

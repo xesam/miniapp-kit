@@ -1,8 +1,7 @@
-//app.js
 App({
-  onLaunch: function () {
-  },
-  globalData: {
-    userInfo: null
-  }
+    onLaunch: function () {
+    },
+    globalData: {
+        userInfo: null
+    }
 })

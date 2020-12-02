@@ -1,7 +1,7 @@
 {
   "name": "miniapp-kit",
   "version": "0.0.1",
-  "description": "",
+  "description": "simple miniapp kit",
   "miniprogram": "libs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/xesam/miniapp-kit",
   "dependencies": {
-    "@xesam/miniapp": "0.0.1"
+    "miniapp-compat": "0.0.4"
   },
   "devDependencies": {},
   "keywords": [

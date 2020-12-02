@@ -1,35 +1,66 @@
-const runtime = require("@xesam/miniapp");
+import wxx from "../wxx";
+
+const miniapp = require("miniapp-compat");
 
 const storage = {
     get(key, defaultValue) {
+        return wxx('getStorage')({key}).then(ds => {
+            if (!ds) {
+                return defaultValue;
+            }
+            const data = JSON.parse(ds);
+            return data.data || defaultValue;
+        });
     },
     getSync(key, defaultValue) {
-        const ds = runtime.host.getStorageSync(key);
+        const ds = miniapp.host.getStorageSync(key);
         if (!ds) {
             return defaultValue;
         }
         const data = JSON.parse(ds);
         return data.data || defaultValue;
     },
-    set(key, defaultValue) {
+    getAll(includeValues) {
+        return wxx('getStorageInfo')().then(res => {
+            if (includeValues) {
+                res.entries = res.keys.map(key => {
+                    return [key, this.getSync(key)];
+                });
+            }
+            return res;
+        });
     },
-    setSync(key, value) {
-        const data = {
-            data: value
+    getAllSync(includeValues) {
+        const res = miniapp.host.getStorageInfoSync();
+        if (includeValues) {
+            res.entries = res.keys.map(key => {
+                return [key, this.getSync(key)];
+            });
+        }
+        return res;
+    },
+    set(key, data) {
+        return wxx('setStorage')({key, data});
+    },
+    setSync(key, data) {
+        const wrap = {
+            data
         };
-        runtime.host.setStorageSync(key, JSON.stringify(data));
+        miniapp.host.setStorageSync(key, JSON.stringify(wrap));
         return this;
     },
     remove(key) {
+        return wxx('removeStorage')({key});
     },
     removeSync(key) {
-        runtime.host.removeStorageSync(key);
+        miniapp.host.removeStorageSync(key);
         return this;
     },
     clear() {
+        return wxx('clearStorage')();
     },
     clearSync() {
-        runtime.host.clearStorageSync();
+        miniapp.host.clearStorageSync();
         return this;
     }
 };

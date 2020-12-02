@@ -1,3 +1,5 @@
 <view>
     <button bind:tap="onTapGetLocation">getLocation</button>
+    <button bind:tap="onTapGetUser">getUser</button>
+    <button bind:tap="onTapStorage">storage</button>
 </view>
