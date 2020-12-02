@@ -1,9 +1,9 @@
 {
   "name": "miniapp-kit",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "simple miniapp kit",
   "miniprogram": "libs",
-  "main": "index.js",
+  "main": "libs/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

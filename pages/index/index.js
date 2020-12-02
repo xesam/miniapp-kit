@@ -1,4 +1,4 @@
-import {location, storage} from '../../index';
+import {location, storage} from '../../libs/index';
 import appUser from './AppUser';
 
 Page({
